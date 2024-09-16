@@ -59,6 +59,7 @@ jobs:
 
   build-for-windows-flutter:
     name: ${{ matrix.job.target }}
+    if: false
     needs: [build-RustDeskTempTopMostWindow]
     runs-on: ${{ matrix.job.os }}
     strategy:
@@ -234,7 +235,7 @@ jobs:
     name: ${{ matrix.job.target }} (${{ matrix.job.os }})
     runs-on: ${{ matrix.job.os }}
     # Temporarily disable this action due to additional test is needed.
-    # if: false
+    if: false
     strategy:
       fail-fast: false
       matrix:
@@ -372,7 +373,7 @@ jobs:
 
   build-for-macOS-arm64-selfhost:
     # use build-for-macOS instead
-    if: false
+    # if: false
     runs-on: [self-hosted, macOS, ARM64]
     steps:
       - name: Export GitHub Actions cache environment variables
@@ -443,7 +444,8 @@ jobs:
             rustdesk*-aarch64.dmg
 
   build-rustdesk-ios:
-    if: ${{ inputs.upload-artifact }}
+    #if: ${{ inputs.upload-artifact }}
+    if: false
     name: build rustdesk ios ipa
     runs-on: ${{ matrix.job.os }}
     strategy:
@@ -604,6 +606,7 @@ jobs:
 
   build-for-macOS:
     name: ${{ matrix.job.target }}
+    if: false
     runs-on: ${{ matrix.job.os }}
     strategy:
       fail-fast: false
@@ -827,6 +830,7 @@ jobs:
 
   build-rustdesk-android:
     needs: [generate-bridge-linux]
+    if: false
     name: build rustdesk android apk ${{ matrix.job.target }}
     runs-on: ${{ matrix.job.os }}
     strategy:
@@ -1111,7 +1115,8 @@ jobs:
   build-rustdesk-android-universal:
     needs: [build-rustdesk-android]
     name: build rustdesk android universal apk
-    if: ${{ inputs.upload-artifact }}
+    # if: ${{ inputs.upload-artifact }}
+    if: false
     runs-on: ubuntu-20.04
     env:
       reltype: release
@@ -1288,6 +1293,7 @@ jobs:
     needs: [generate-bridge-linux]
     name: build rustdesk linux ${{ matrix.job.target }}
     runs-on: ${{ matrix.job.on }}
+    if: false
     strategy:
       fail-fast: false
       matrix:
@@ -1603,7 +1609,8 @@ jobs:
             res/rustdesk-${{ env.VERSION }}*.zst
 
   build-rustdesk-linux-sciter:
-    if: ${{ inputs.upload-artifact }}
+    # if: ${{ inputs.upload-artifact }}
+    if: false
     needs: build-rustdesk-linux # not for dep, just make it run later for parallelism
     runs-on: ${{ matrix.job.on }}
     name: build-rustdesk-linux-sciter ${{ matrix.job.target }}
@@ -1820,7 +1827,8 @@ jobs:
     name: Build appimage ${{ matrix.job.target }}
     needs: [build-rustdesk-linux]
     runs-on: ubuntu-20.04
-    if: ${{ inputs.upload-artifact }}
+    # if: ${{ inputs.upload-artifact }}
+    if: false
     strategy:
       fail-fast: false
       matrix:
@@ -1872,7 +1880,8 @@ jobs:
       - build-rustdesk-linux
       - build-rustdesk-linux-sciter
     runs-on: ${{ matrix.job.on }}
-    if: ${{ inputs.upload-artifact }}
+    # if: ${{ inputs.upload-artifact }}
+    if: false
     strategy:
       fail-fast: false
       matrix:
